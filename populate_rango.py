@@ -1,4 +1,4 @@
-import  os
+import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE',
                       'tango_with_django_project.settings')
 
@@ -8,12 +8,11 @@ from rango.models import Category, Page
 
 def populate():
     
-
     python_pages = [
         {"title": "Official Python Tutorial",
-         "url":"http://docs.python.org/2/tutorial/"},
+         "url": "http://docs.python.org/2/tutorial/"},
         {"title": "How to Think Like a Computer Scientist",
-         "url":"https://www.greenteapress.com/thinkpython/"},
+         "url": "http://www.greenteapress.com/thinkpython/"},
         {"title": "Learn Python in 10 Minutes",
          "url":"http://www.korokithakis.net/tutorials/python/"} ]
 
@@ -27,9 +26,9 @@ def populate():
 
     other_pages = [
         {"title": "Bottle",
-         "url":"http://bottlepy.org/docs/dev/"},
+         "url": "http://bottlepy.org/docs/dev/"},
         {"title": "Flask",
-         "url":"https://flash.pocoo.org"} ]
+         "url": "http://flask.pocoo.org"} ]
 
     cats = {"Python": {"pages": python_pages},
             "Django": {"pages": django_pages},
@@ -44,18 +43,18 @@ def populate():
         for p in Page.objects.filter(category=c):
             print("- {0} - {1}".format(str(c), str(p)))
 
-            def add_page(cat, title, url, views=0):
-                p = Page.objects.get_or_create(category=cat, title=title)
-                p.url=url
-                p.views=views
-                p.save()
-                return p
+def add_page(cat, title, url, views=0):
+    p = Page.objects.get_or_create(category=cat, title=title)[0]
+    p.url=url
+    p.views=views
+    p.save()
+    return p
 
 def add_cat(name):
     c = Category.objects.get_or_create(name=name)[0]
     c.save()
     return c
 
-if __name__ == '__main__':
-    print("Strating Rango population script...")
+if __name__=='__main__':
+    print("Starting Rango population script...")
     populate()
