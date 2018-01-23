@@ -7,7 +7,7 @@ django.setup()
 from rango.models import Category, Page
 
 def populate():
-    
+
     python_pages = [
         {"title": "Official Python Tutorial",
          "url": "http://docs.python.org/2/tutorial/"},
@@ -30,9 +30,9 @@ def populate():
         {"title": "Flask",
          "url": "http://flask.pocoo.org"} ]
 
-    cats = {"Python": {"pages": python_pages},
-            "Django": {"pages": django_pages},
-            "Other Frameworks": {"pages": other_pages} }
+    cats = {"Python": {"pages": python_pages, "views": 128, "likes": 64},
+            "Django": {"pages": django_pages, "views": 64, "likes": 32},
+            "Other Frameworks": {"pages": other_pages, "views": 32, "likes": 16} }
 
     for cat, cat_data in cats.items():
         c = add_cat(cat)
@@ -55,6 +55,6 @@ def add_cat(name):
     c.save()
     return c
 
-if __name__=='__main__':
-    print("Starting Rango population script...")
+if __name__ == '__main__':
+    print("Strating Rango population script...")
     populate()
